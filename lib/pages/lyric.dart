@@ -36,11 +36,6 @@ class _LirycPageState extends State<LyricPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        //title: Text("Cancionero Familiar"),
-        elevation: 6,
-      ),
-      floatingActionButton: _btnActions(),//se genera el widget FAV desde funcion
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -84,36 +79,45 @@ class _LirycPageState extends State<LyricPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _btnActions() {//funcion que genera los botones
-    return Column(//retorna una columna para desplegar todos los botones
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        FloatingActionButton(// boton +
-            heroTag: "btn1",
-            child: Icon(Icons.add),
-            onPressed: () {//incrementa el tamaño de la funte
-              setState(() {
-                _fontsize++;
-              });
-            }),
-        FloatingActionButton(
-            heroTag: "btn2",
-            child: Icon(Icons.remove),
-            onPressed: () {//disminuye el tamaño de la funte
-              setState(() {
-                _fontsize--;
-              });
-            }),
-        SizedBox(height: 10,),//espacio en blanco
-        FloatingActionButton(//tercer boton para logica de favoritos (NO IMPLEMENTADO)
-            
-            heroTag: "btn3",
-            child: Icon(Icons.favorite_border),
-            onPressed: () {}),
-      ],
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.teal,
+        child: Row(
+          children: [
+            FlatButton.icon(
+              onPressed: () {Navigator.pop(context);},
+              icon: Icon(
+                Icons.arrow_back_ios, 
+                size: 30, 
+                color: Colors.white),
+              label: RichText(
+                text: TextSpan(
+                  text: "Atrás",
+                  style: TextStyle(fontSize: 18,color: Colors.white)),
+              ),
+            ),
+            Spacer(),
+            IconButton(
+              color: Colors.white,
+              icon: Icon(Icons.add, size: 30), 
+              onPressed: () {//incrementa el tamaño de la funte
+                setState(() {_fontsize++;});
+              }
+            ),
+            IconButton(
+              color: Colors.white,
+              icon: Icon(Icons.remove, size: 30), 
+              onPressed: () {//incrementa el tamaño de la funte
+                setState(() {_fontsize--;});
+              }
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton:FloatingActionButton(
+        child: Icon(Icons.favorite),
+        backgroundColor: Colors.teal[400], 
+        onPressed: () {}),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

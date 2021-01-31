@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         title: 'Landing',
         theme: ThemeData(//parametros de estilo visual para el color principal
           brightness: Brightness.dark,
-          primaryColor: Color(0xFF26A69A),
+          primaryColor: Colors.teal,
         ),
         home: WelcomeScreen());
   }
@@ -83,7 +83,7 @@ class WelcomeScreen extends StatelessWidget {
                               horizontal: 50, vertical: 16),//espaciado interno para ambos ejes
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),//bordes redondeados y color
-                            color: Color(0xFF26A69A),
+                            color: Theme.of(context).primaryColor,
                           ),
                           child: Row(//icono de nota musical, se colorea y ajusta tamaño
                             children: <Widget>[

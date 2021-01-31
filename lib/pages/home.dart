@@ -4,7 +4,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 void main() {
   runApp(Home());
 }
-
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,6 @@ class Home extends StatelessWidget {
     );
   }
 }
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -29,10 +27,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text("Cancionero Familiar"),
-          elevation: 6,
-      ),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -41,11 +35,11 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.only(top: 20),
                 child: CarouselSlider(//widget de carrusel
                   options: CarouselOptions(//parametros de configuracion
-                    height: 450,
+                    height: 425,
                     viewportFraction: 0.9,//porte de contenido
                     initialPage: 0,//defaut view
                     enableInfiniteScroll: true,//scroll infinito, 
-                    autoPlay: true,//autoscroll y tiempo asociado
+                    autoPlay: false,//autoscroll y tiempo asociado
                     autoPlayInterval: Duration(seconds: 9),
                     autoPlayAnimationDuration: Duration(milliseconds: 1200),
                   ),
@@ -143,8 +137,9 @@ class _HomePageState extends State<HomePage> {
                   }).toList(),//trasformacion a lista del map con los widgets
                 )
             ),
+            
             Container(//texto al inferior de la vista
-              margin: EdgeInsets.only(top: 22, right:10, left:10 ),
+              margin: EdgeInsets.only(top: 19, right:10, left:10 ),
               child: RichText(
                 text: TextSpan(
                   text: 'Este cancionero es parte del tesoro musical de nuestra familia.\n\n En memoria de nuestro querido Juan\n Agosto, 2020 ',

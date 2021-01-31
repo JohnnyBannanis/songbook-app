@@ -10,22 +10,18 @@ class Index extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Cancionero',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: ThemeData(//parametros de estilo visual para el color principal
+          primaryColor: Colors.teal,
+        ),
       home: IndexPage(),
     );
   }
 }
-
 class IndexPage extends StatefulWidget {
   @override
   _IndexPageState createState() => _IndexPageState();
 }
-
 class _IndexPageState extends State<IndexPage> {
   List _songs = List();//canciones
   List _songsForDisplay = List();//canciones a mostrar 
@@ -35,7 +31,6 @@ class _IndexPageState extends State<IndexPage> {
     var result = await songsProvider.loadData();//se llama al provider y se espera respuesta
     return result;
   }
-
   @override
   void initState() {
     getjsoninfo().then((value) {
@@ -46,26 +41,24 @@ class _IndexPageState extends State<IndexPage> {
     });
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text("Cancionero Familiar"),
-          elevation: 6,
-        ),
       resizeToAvoidBottomPadding: false,
       body: Column(children: <Widget>[
       Container(
-          color: Theme.of(context).primaryColor,
+          color: Colors.teal,
           child: Padding(
-              padding: const EdgeInsets.all(3.0),
+              padding: const EdgeInsets.only(top:5.0,bottom: 5.0,left: 1,right: 1),
               child: Card(//carta para la barra de busqueda
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
                 child: ListTile(
-                  leading: Icon(Icons.search),
                   title: TextField(//campo de busqueda
                     controller: _input,//se pasa la variable al controlador del campo de texto
                     decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.search),
                         border: InputBorder.none,
                         hintText: 'Busqueda',
                         suffixIcon: IconButton(//accion al pulsar el boton "x" para limpiar campo
@@ -78,7 +71,8 @@ class _IndexPageState extends State<IndexPage> {
                                   .toList();
                               });
                             },
-                            icon: Icon(Icons.cancel))),
+                            icon: Icon(Icons.cancel))
+                    ),
                     onChanged: (text) {//se llama la funcion cunado cambie el campo de busqueda
                       text = text.toLowerCase();//se maneja la variable en lowercase
                       setState(() {
@@ -96,6 +90,7 @@ class _IndexPageState extends State<IndexPage> {
               ))),
       Expanded(
         child: ListView.builder(//se construye el widget de listado
+          padding: EdgeInsets.only(top: 0.0),
           itemBuilder: (context, index) {
             return Container(
               decoration: BoxDecoration(//se agrega un separador a cada tile
@@ -112,9 +107,7 @@ class _IndexPageState extends State<IndexPage> {
   }
 
   _songStart() {//widget vacio para mostrar al principio de la lista generada
-    return Padding(
-      padding: const EdgeInsets.all(0),
-    );
+    return Padding(padding: EdgeInsets.zero);
   }
 
   _listItem(i) {//se genera el widget list tile, se pasa un indice en la lista de canciones
@@ -126,9 +119,11 @@ class _IndexPageState extends State<IndexPage> {
         subtitle: Text(data[i]['autor']),
         trailing: Icon(Icons.arrow_forward_ios, color: Colors.teal),
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            return LyricPage(data: item);//se pasa parametros a la vista LyricPage
-          }));
-        });
+          Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LyricPage(data: item)),
+          );//se pasa parametros a la vista LyricPage
+        }
+      );
   }
 }

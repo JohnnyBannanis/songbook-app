@@ -10,52 +10,35 @@ class Start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Home',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.teal,
+        primaryColor: Colors.teal,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: StartPage(),
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            bottom: TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.home)),
+                Tab(icon: Icon(Icons.favorite)),
+                Tab(icon: Icon(Icons.list)),
+              ],
+              indicatorColor: Colors.white,
+            ),
+            title: Text('Cancionero Familiar'),
+          ),
+          body: TabBarView(
+            children: [
+              Home(),
+              Icon(Icons.favorite),
+              Index(),
+            ],
+          ),
+        ),
+      ),
     );
-  }
-}
-
-class StartPage extends StatefulWidget {
-  @override
-  _StartPageState createState() => _StartPageState();
-}
-
-class _StartPageState extends State<StartPage> {
-  int _currentIndex = 0;//control de indice de vista seleccionada
-  final tabs = [Home(), Index()];//listado de vistas
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        
-        body: tabs[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(//widged para pestañas inferiores
-          items: [//iconos y etiqueda para cada elemento de la lista en orden
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: 'Índice',
-            ),
-          ],
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _currentIndex,
-          showUnselectedLabels: false,
-          selectedItemColor: Colors.white,
-          backgroundColor: Colors.teal,
-          onTap: (index) {//interaccion con el BottomNavigationBar para cambiar el estado de la vista en despliegue al pulsar cada boton
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ));
   }
 }

@@ -26,7 +26,7 @@ class Start extends StatelessWidget {
                 Tab(icon: Icon(Icons.favorite)),
                 Tab(icon: Icon(Icons.list)),
               ],
-              indicatorColor: Colors.white,
+              indicatorColor: Colors.white
             ),
             title: Text('Cancionero Familiar'),
           ),

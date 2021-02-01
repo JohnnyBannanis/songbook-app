@@ -98,16 +98,16 @@ class _LirycPageState extends State<LyricPage> {
             Spacer(),
             IconButton(
               color: Colors.white,
-              icon: Icon(Icons.add, size: 30), 
+              icon: Icon(Icons.remove, size: 30), 
               onPressed: () {//incrementa el tamaño de la funte
-                setState(() {_fontsize++;});
+                setState(() {_decreaseFont();});
               }
             ),
             IconButton(
               color: Colors.white,
-              icon: Icon(Icons.remove, size: 30), 
+              icon: Icon(Icons.add, size: 30), 
               onPressed: () {//incrementa el tamaño de la funte
-                setState(() {_fontsize--;});
+                setState(() {_increaseFont();});
               }
             ),
           ],
@@ -120,4 +120,18 @@ class _LirycPageState extends State<LyricPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
+
+  void _increaseFont(){
+    if(_fontsize <= 24){
+      _fontsize++;
+    }
+  }
+
+  void _decreaseFont(){
+    if(_fontsize >= 14){
+      _fontsize--;
+    }
+  }
+
+
 }

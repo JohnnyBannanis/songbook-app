@@ -29,23 +29,28 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Container(
         color: Color.fromRGBO(197, 231, 231, 1),
-        child: Expanded(
-          child: ListView(//se construye el widget de listado
-            padding: EdgeInsets.only(top:15),
-            children: [
-              _cardTextOne(),
-              _cardImgOne(),
-              _cardImgTwo(),
-              _cardTextTwo()
-            ],
-        ),
-      )
+        child: Row(
+          children: [Expanded(
+            child: ListView(//se construye el widget de listado
+              padding: EdgeInsets.only(top:15),
+              children: [
+                _cardTextOne(),
+                _cardImgOne(),
+                _cardImgTwo(),
+                _cardTextTwo()
+              ],
+            ),
+          )],
+        )
       ),
     );
   }
 
   _cardTextOne(){
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
       elevation: 6,
       margin: EdgeInsets.only(left: 15,right: 15,bottom: 15),
       color: cardColor,
@@ -97,6 +102,9 @@ class _HomePageState extends State<HomePage> {
 
   _cardImgOne(){
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
       elevation: 6,
       margin: EdgeInsets.only(left: 15,right: 15,bottom: 15),
       color: cardColor,
@@ -106,6 +114,7 @@ class _HomePageState extends State<HomePage> {
         margin: EdgeInsets.all(6),
         child: Container(
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
               image: AssetImage('assets/img/tiojuan.jpg'),//llamado a asset de imagen
               fit: BoxFit.cover,// todo el tamaño disponible
@@ -118,6 +127,9 @@ class _HomePageState extends State<HomePage> {
 
   _cardTextTwo(){
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
       elevation: 6,
       margin: EdgeInsets.only(left: 15,right: 15,bottom: 15),
       color: cardColor,
@@ -140,6 +152,9 @@ class _HomePageState extends State<HomePage> {
 
   _cardImgTwo(){
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
       elevation: 6,
       margin: EdgeInsets.only(left: 15,right: 15,bottom: 15),
       color: cardColor,
@@ -149,6 +164,7 @@ class _HomePageState extends State<HomePage> {
         margin: EdgeInsets.all(6),
         child: Container(
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
               image: AssetImage('assets/img/abuelita.jpg'),
               fit: BoxFit.cover,

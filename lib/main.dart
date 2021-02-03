@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:cancionero/screens/wellcome.dart';
+import 'package:cancionero/screens/welcome.dart';
 import 'package:provider/provider.dart';
 import 'providers/provider.dart';
 

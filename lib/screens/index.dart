@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cancionero/pages/lyric.dart';
+import 'package:cancionero/screens/lyric.dart';
 import 'package:cancionero/providers/songs_provider.dart';
 
 void main() {
@@ -114,6 +114,7 @@ class _IndexPageState extends State<IndexPage> {
     final data = _songsForDisplay;
     final item = data[i];//objeto cancion
     return ListTile(//campos del listtile
+        tileColor: Color.fromRGBO(241, 249, 249, 1),
         contentPadding: EdgeInsets.only(left: 25, right: 16),
         title: Text(data[i]['title']),
         subtitle: Text(data[i]['autor']),

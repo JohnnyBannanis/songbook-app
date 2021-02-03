@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cancionero/providers/provider.dart';
 
 void main() {
   runApp(Lyric());
@@ -35,6 +37,7 @@ class _LirycPageState extends State<LyricPage> {
 
   @override
   Widget build(BuildContext context) {
+    var myProvider = Provider.of<MyProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -116,7 +119,11 @@ class _LirycPageState extends State<LyricPage> {
       floatingActionButton:FloatingActionButton(
         child: Icon(Icons.favorite),
         backgroundColor: Colors.teal[400], 
-        onPressed: () {}),
+        onPressed: () {
+          var auxList = myProvider.favorites;
+          auxList.add(data);
+          myProvider.myfavs = auxList;
+        }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

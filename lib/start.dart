@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:cancionero/pages/home.dart';
-import 'package:cancionero/pages/index.dart';
+import 'package:cancionero/screens/home.dart';
+import 'package:cancionero/screens/index.dart';
+import 'package:cancionero/screens/favorites.dart';
+
 
 void main() {
   runApp(Start());
@@ -33,7 +35,7 @@ class Start extends StatelessWidget {
           body: TabBarView(
             children: [
               Home(),
-              Icon(Icons.favorite),
+              Favorites(),
               Index(),
             ],
           ),

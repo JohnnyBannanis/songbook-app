@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cancionero/screens/start.dart';
 import 'dart:ui';
-import 'package:cancionero/start.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override

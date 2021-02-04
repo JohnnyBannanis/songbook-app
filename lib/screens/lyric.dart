@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cancionero/providers/provider.dart';
 
-
-
 class Lyric extends StatefulWidget {
   //recepcion de parametros desde la vista anterior
   final data;

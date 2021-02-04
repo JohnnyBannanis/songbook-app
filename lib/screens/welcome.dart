@@ -6,7 +6,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:  Container(
+      body:  Container(
       decoration:  BoxDecoration(
         image:  DecorationImage(//definicion de imagen de fondo, se especifica la fuente y su uso del total del espacio del contenedor
           image:  AssetImage('assets/img/fondo.jpg'),

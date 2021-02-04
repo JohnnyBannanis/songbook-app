@@ -2,31 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cancionero/providers/provider.dart';
 
-void main() {
-  runApp(Lyric());
-}
 
-class Lyric extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Lyric',
-      debugShowCheckedModeBanner: false,
-      home: LyricPage(),
-    );
-  }
-}
 
-class LyricPage extends StatefulWidget {
+class Lyric extends StatefulWidget {
   //recepcion de parametros desde la vista anterior
   final data;
-  const LyricPage({Key key, this.data}) : super(key: key);
-
+  const Lyric({Key key, this.data}) : super(key: key);
   @override
   _LirycPageState createState() => _LirycPageState();
 }
 
-class _LirycPageState extends State<LyricPage> {
+class _LirycPageState extends State<Lyric> {
   var data;
   double _fontsize = 15;//control dinamico del tamaño de fuente
   @override
@@ -39,6 +25,7 @@ class _LirycPageState extends State<LyricPage> {
   Widget build(BuildContext context) {
     var myProvider = Provider.of<MyProvider>(context);
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -86,18 +73,6 @@ class _LirycPageState extends State<LyricPage> {
         color: Colors.teal,
         child: Row(
           children: [
-            FlatButton.icon(
-              onPressed: () {Navigator.pop(context);},
-              icon: Icon(
-                Icons.arrow_back_ios, 
-                size: 30, 
-                color: Colors.white),
-              label: RichText(
-                text: TextSpan(
-                  text: "Atrás",
-                  style: TextStyle(fontSize: 18,color: Colors.white)),
-              ),
-            ),
             Spacer(),
             IconButton(
               color: Colors.white,

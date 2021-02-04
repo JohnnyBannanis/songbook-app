@@ -71,7 +71,7 @@ class Favorites extends StatelessWidget {
         splashColor: Colors.teal,
         onTap: () {
           Navigator.push(context,
-          MaterialPageRoute(builder: (context) => LyricPage(data: data[i])),
+          MaterialPageRoute(builder: (context) => Lyric(data: data[i])),
           );
         },
         child: Column(children: <Widget>[//textos

@@ -1,28 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(Home());
-}
 class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Home',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: HomePage(),
-    );
-  }
-}
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   final cardColor = Color.fromRGBO(241, 249, 249, 1);
   @override
   Widget build(BuildContext context) {
@@ -110,7 +88,6 @@ class _HomePageState extends State<HomePage> {
       color: cardColor,
       child: Container(
         height: 450,
-        width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.all(6),
         child: Container(
           decoration: BoxDecoration(
@@ -160,7 +137,6 @@ class _HomePageState extends State<HomePage> {
       color: cardColor,
       child: Container(
         height: 500,
-        width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.all(6),
         child: Container(
           decoration: BoxDecoration(

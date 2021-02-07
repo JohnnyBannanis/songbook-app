@@ -12,6 +12,10 @@ class Lyric extends StatefulWidget {
 
 class _LirycPageState extends State<Lyric> {
   var data;
+  
+  var _heartSize = 30.0;
+  var _heartBgColor = Colors.teal[400];
+
   double _fontsize = 15;//control dinamico del tamaño de fuente
   @override
   void initState() {//estado inicial data = a data recepcionada a travez del paso de parametro
@@ -33,7 +37,7 @@ class _LirycPageState extends State<Lyric> {
               Container(
                 child: RichText(
                   text: TextSpan(
-                      text: data['title'],//despliegue de informacion titulo
+                      text: data[0]['title'],//despliegue de informacion titulo
                       style: TextStyle(
                           fontSize: 28,
                           color: Colors.black,
@@ -45,7 +49,7 @@ class _LirycPageState extends State<Lyric> {
                 padding: EdgeInsets.only(bottom: 15),
                 child: RichText(
                   text: TextSpan(
-                      text: data['autor'],//despliegue de informacion autor
+                      text: data[0]['autor'],//despliegue de informacion autor
                       style: TextStyle(
                         fontSize: 22,
                         color: Colors.black,
@@ -55,7 +59,7 @@ class _LirycPageState extends State<Lyric> {
               ),
               RichText(
                 text: TextSpan(
-                    text: data['lyric'],//despliegue de informacion letra
+                    text: data[0]['lyric'],//despliegue de informacion letra
                     style: TextStyle(
                       fontSize: _fontsize,
                       color: Colors.black,
@@ -90,12 +94,20 @@ class _LirycPageState extends State<Lyric> {
         ),
       ),
       floatingActionButton:FloatingActionButton(
-        child: Icon(Icons.favorite),
-        backgroundColor: Colors.teal[400], 
+        child: Icon(
+        (!myProvider.favorites.contains(data[1]))
+          ? Icons.favorite_outline
+          : Icons.favorite,
+          color: Colors.white,
+          size: _heartSize),
+        backgroundColor: _heartBgColor, 
         onPressed: () {
-          var auxList = myProvider.favorites;
-          auxList.add(data);
-          myProvider.myfavs = auxList;
+          if(myProvider.favorites.contains(data[1])){
+            myProvider.removeFav(data[1]);
+          }
+          else{
+            myProvider.addFav(data[1]);
+          }
         }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
@@ -112,6 +124,5 @@ class _LirycPageState extends State<Lyric> {
       _fontsize--;
     }
   }
-
 
 }

@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(//parametros de estilo visual para el color principal
           primaryColor: Colors.teal,
+          primarySwatch: Colors.teal
         ),
         home: WelcomeScreen()
       )

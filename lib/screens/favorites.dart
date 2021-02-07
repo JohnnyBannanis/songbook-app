@@ -1,28 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:cancionero/providers/provider.dart';
 import 'package:cancionero/screens/lyric.dart';
+import 'package:cancionero/services/SongsService.dart';
 
-void main() => runApp(MaterialApp(
-      home: Favorites(),
-    ));
-
-class Favorites extends StatelessWidget {
+class Favorites extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {   
-    var myProvider = Provider.of<MyProvider>(context);
-    return Scaffold(
-      body: _favBody(myProvider.favorites)
-    );
+  _FavPageState createState() => _FavPageState();
+}
+
+class _FavPageState extends State<Favorites> {
+  var favs = [];
+  var songs = [];
+
+  Future getInfo() async {
+    var result1 = await SongService().loadData();//se llama al provider y se espera respuesta
+    var result2 = await SongService.getFavs();
+    return [result1, result2];
+  }
+  @override
+  void initState() {
+    getInfo().then((value) {
+      setState(() {//se establece el estado inicial haciendo que as canciones a mostrar sean igueles al total de canciones
+        songs.addAll(value[0]);
+        favs.addAll(value[1]);
+      });
+    });
+    super.initState();
   }
 
-  _favBody(List lst){
-    if(lst.length == 0){
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _favBody(favs, songs)
+    );  
+  }
+
+  _favBody(List favList, songList){
+    if(favList.length == 0){
       return Container(
         color: Color.fromRGBO(241, 249, 249, 1),
         child: Center(
           child: Column(
-            
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -35,19 +52,19 @@ class Favorites extends StatelessWidget {
         ),
       );
     }
-    else{
+    else {
       return Container(
         color: Color.fromRGBO(241, 249, 249, 1),
-        child: Row(
+        child: Column(
           children: [Expanded(
             child: ListView.builder(//se construye el widget de listado
               padding: EdgeInsets.only(top:15),
+              itemCount: favList.length + 1,
               itemBuilder: (context, index) {
                 return Container(
-                  child: index == 0 ? Padding(padding: EdgeInsets.zero) : _listItem(index - 1,lst,context),//se implementa una logica para generar el child, para el indice 0 se muestra _songStart y para el resto de los indices se genera el listTile
+                  child: index == 0 ? Padding(padding: EdgeInsets.zero): _listItem(index - 1,context),//se implementa una logica para generar el child, para el indice 0 se muestra _songStart y para el resto de los indices se genera el listTile
                 );
               },
-              itemCount: lst.length + 1,
             ),
           )],
         )
@@ -56,8 +73,8 @@ class Favorites extends StatelessWidget {
   }
 
 
-  _listItem(i,lst,context) {//se genera el widget list tile, se pasa un indice en la lista de canciones
-    final data = lst;
+  _listItem(i, context) {//se genera el widget list tile, se pasa un indice en la lista de canciones
+    final data = songs.elementAt(favs[i]);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -71,7 +88,7 @@ class Favorites extends StatelessWidget {
         splashColor: Colors.teal,
         onTap: () {
           Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Lyric(data: data[i])),
+          MaterialPageRoute(builder: (context) => Lyric(data: [data,favs[i]])),
           );
         },
         child: Column(children: <Widget>[//textos
@@ -80,7 +97,7 @@ class Favorites extends StatelessWidget {
           margin: EdgeInsets.only(top: 30),
           child: RichText(
             text: TextSpan(
-              text: data[i]["title"],
+              text: data["title"],
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.black)
@@ -92,5 +109,4 @@ class Favorites extends StatelessWidget {
       )
     );
   }
-
 }

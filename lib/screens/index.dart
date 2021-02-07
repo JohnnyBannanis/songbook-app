@@ -109,7 +109,7 @@ class _IndexPageState extends State<Index> {
       trailing: Icon(Icons.arrow_forward_ios, color: Colors.teal),
       onTap: () {
         Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Lyric(data: item)),
+          MaterialPageRoute(builder: (context) => Lyric(data: [item,i])),
         );//se pasa parametros a la vista LyricPage
       }
     );

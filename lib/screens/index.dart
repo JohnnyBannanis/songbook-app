@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cancionero/screens/lyric.dart';
 import 'package:cancionero/services/SongsService.dart';
 
-
 class Index extends StatefulWidget {
   @override
   _IndexPageState createState() => _IndexPageState();
@@ -66,8 +65,8 @@ class _IndexPageState extends State<Index> {
                       _songsForDisplay = _songs
                           .where((song) => //desplegamos en la vista solo aquellas canciones que coincidan con la busqueda en cualquiera de los campos title lyrics y autor
                               (song["title"].toLowerCase().contains(text) ||
-                                //song["lyric"].toLowerCase().contains(text) ||
-                                song["autor"].toLowerCase().contains(text)
+                               song["autor"].toLowerCase().contains(text) ||
+                               song["lyric"].toString().toLowerCase().contains(text)
                               ))
                           .toList();
                     });

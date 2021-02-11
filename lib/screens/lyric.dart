@@ -25,6 +25,7 @@ class _LirycPageState extends State<Lyric> {
 
   @override
   Widget build(BuildContext context) {
+    List parrafos = data[0]['lyric'];
     var myProvider = Provider.of<MyProvider>(context);
     return Scaffold(
       appBar: AppBar(),
@@ -57,15 +58,8 @@ class _LirycPageState extends State<Lyric> {
                       )),
                 ),
               ),
-              RichText(
-                text: TextSpan(
-                    text: data[0]['lyric'],//despliegue de informacion letra
-                    style: TextStyle(
-                      fontSize: _fontsize,
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                    )),
-                textAlign: TextAlign.center,
+              Column(
+                children: letra(parrafos),
               )
             ],
           ),
@@ -103,6 +97,7 @@ class _LirycPageState extends State<Lyric> {
         backgroundColor: _heartBgColor, 
         onPressed: () {
           if(myProvider.favorites.contains(data[1])){
+
             myProvider.removeFav(data[1]);
           }
           else{
@@ -125,4 +120,25 @@ class _LirycPageState extends State<Lyric> {
     }
   }
 
+  letra(parrafos){
+    List<Widget> aux = [];
+    for (var i = 0; i < parrafos.length; i++) {
+      aux.add(parrafo(i));
+    }
+    return aux;
+  }
+
+  parrafo(i){
+    return RichText(
+        text:TextSpan(
+            text: data[0]['lyric'][i],//despliegue de informacion letra
+            style: TextStyle(
+              fontSize: _fontsize,
+              color: Colors.black,
+              fontWeight: FontWeight.normal,
+              height: 1.1
+            )),
+        textAlign: TextAlign.center,
+      );
+  }
 }

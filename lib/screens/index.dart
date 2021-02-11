@@ -66,7 +66,7 @@ class _IndexPageState extends State<Index> {
                       _songsForDisplay = _songs
                           .where((song) => //desplegamos en la vista solo aquellas canciones que coincidan con la busqueda en cualquiera de los campos title lyrics y autor
                               (song["title"].toLowerCase().contains(text) ||
-                                song["lyric"].toLowerCase().contains(text) ||
+                                //song["lyric"].toLowerCase().contains(text) ||
                                 song["autor"].toLowerCase().contains(text)
                               ))
                           .toList();
@@ -101,6 +101,7 @@ class _IndexPageState extends State<Index> {
   _listItem(i) {//se genera el widget list tile, se pasa un indice en la lista de canciones
     final data = _songsForDisplay;
     final item = data[i];//objeto cancion
+    final realIndex = _songs.indexOf(item);
     return ListTile(//campos del listtile
       tileColor: Color.fromRGBO(241, 249, 249, 1),
       contentPadding: EdgeInsets.only(left: 25, right: 16),
@@ -109,7 +110,7 @@ class _IndexPageState extends State<Index> {
       trailing: Icon(Icons.arrow_forward_ios, color: Colors.teal),
       onTap: () {
         Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Lyric(data: [item,i])),
+          MaterialPageRoute(builder: (context) => Lyric(data: [item,realIndex])),
         );//se pasa parametros a la vista LyricPage
       }
     );

@@ -29,6 +29,12 @@ class _FavPageState extends State<Favorites> {
 
   @override
   Widget build(BuildContext context) {
+    getInfo().then((value) {
+      setState(() {//se establece el estado inicial haciendo que as canciones a mostrar sean igueles al total de canciones
+        favs = [];
+        favs.addAll(value[1]);
+      });
+    });
     return Scaffold(
       body: _favBody(favs, songs)
     );  
@@ -76,37 +82,38 @@ class _FavPageState extends State<Favorites> {
   _listItem(i, context) {//se genera el widget list tile, se pasa un indice en la lista de canciones
     final data = songs.elementAt(favs[i]);
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      elevation: 6,
-      margin: EdgeInsets.only(left: 15,right: 15,bottom: 15),
-      color: Colors.teal[200],
-      child: InkWell(
-        borderRadius: BorderRadius.circular(15),
-        highlightColor: Colors.teal[400],
-        splashColor: Colors.teal,
-        onTap: () {
-          Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Lyric(data: [data,favs[i]])),
-          );
-        },
-        child: Column(children: <Widget>[//textos
-        Container(
-          height: 60,
-          margin: EdgeInsets.only(top: 30),
-          child: RichText(
-            text: TextSpan(
-              text: data["title"],
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.black)
-            ),
-            textAlign: TextAlign.start
-          )
-        )]
-        )
-      )
+          color: Colors.teal[200],
+          margin: EdgeInsets.only(left: 15,right: 12,bottom: 15),
+          elevation: 6,
+          child: InkWell(
+          borderRadius: BorderRadius.circular(5),
+          splashColor: Colors.teal[400],
+          highlightColor: Colors.teal[400],
+          onTap: () {
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Lyric(data: [data,favs[i]])),
+                );
+              },
+          child: ListTile(
+            leading: Icon(Icons.favorite,size: 15,),
+            trailing: Icon(Icons.arrow_forward_ios),
+            title: RichText(
+                  text: TextSpan(
+                    text: data["title"],
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black)
+                  )
+                ),
+            subtitle: RichText(
+                  text: TextSpan(
+                    text: data["autor"],
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.black)
+                  )),
+          ),
+        ),
     );
   }
 }

@@ -12,7 +12,7 @@ class Lyric extends StatefulWidget {
 
 class _LirycPageState extends State<Lyric> {
   var data;
-  
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   var _heartSize = 30.0;
   var _heartBgColor = Colors.teal[400];
 
@@ -25,9 +25,11 @@ class _LirycPageState extends State<Lyric> {
 
   @override
   Widget build(BuildContext context) {
+    
     List parrafos = data[0]['lyric'];
     var myProvider = Provider.of<MyProvider>(context);
     return Scaffold(
+      key: _scaffoldKey,  
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Container(
@@ -97,11 +99,14 @@ class _LirycPageState extends State<Lyric> {
         backgroundColor: _heartBgColor, 
         onPressed: () {
           if(myProvider.favorites.contains(data[1])){
-
+            var contained = true;
             myProvider.removeFav(data[1]);
+             _scaffoldKey.currentState.showSnackBar(favSnackBar(contained));
           }
           else{
+            var contained = false;
             myProvider.addFav(data[1]);
+            _scaffoldKey.currentState.showSnackBar(favSnackBar(contained));
           }
         }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -117,6 +122,21 @@ class _LirycPageState extends State<Lyric> {
   void _decreaseFont(){
     if(_fontsize >= 14){
       _fontsize--;
+    }
+  }
+
+  Widget favSnackBar(bool contained){
+    if(contained == true){
+      return SnackBar(
+        content: Text('Eliminado de Favoritos'),
+        duration: Duration(seconds :1),
+        );
+    }
+    else{
+      return SnackBar(
+        content: Text('Agregado a Favoritos'),
+        duration: Duration(seconds :1),
+        );
     }
   }
 

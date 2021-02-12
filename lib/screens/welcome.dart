@@ -1,8 +1,32 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cancionero/screens/start.dart';
 import 'dart:ui';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin {
+
+  AnimationController _animationController;
+  Animation _animation;
+
+  @override
+  void initState() {
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 800));
+    _animationController.repeat(
+      reverse: true
+      );
+    _animation = Tween(begin: 2.0, end: 5.0).animate(_animationController)..addListener(() {
+      setState(() {
+        
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,16 +79,20 @@ class WelcomeScreen extends StatelessWidget {
                         child: Container(//
                           margin: EdgeInsets.only(bottom: 80),//espacio entre el final de la vista y el boton
                           padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 16),//espaciado interno para ambos ejes
+                              horizontal: 40, vertical: 15),//espaciado interno para ambos ejes
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),//bordes redondeados y color
                             color: Theme.of(context).primaryColor,
+                            boxShadow: [BoxShadow(
+                              color: Colors.teal,
+                              spreadRadius: _animation.value
+                            )]
                           ),
                           child: Row(//icono de nota musical, se colorea y ajusta tamaño
                             children: <Widget>[
                               Icon(
                                 Icons.music_note,
-                                size: 26,
+                                size: 30,
                                 color: Colors.white,
                               )
                             ],

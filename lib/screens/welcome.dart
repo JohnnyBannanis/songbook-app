@@ -59,11 +59,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                           TextSpan(//primer texto en negrita con fuente mas grande
                               text: "CANCIONERO\n FAMILIAR\n",
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 35)),
+                                  fontWeight: FontWeight.bold, fontSize: 35, color: Colors.grey[50])),
                           TextSpan(//segundo texto en fuente mas pequeña a la previa
                               text:
                                   "\nPara las tardes de canturreo alrededor \nde un tecito en la mesa larga",
-                              style: TextStyle(fontSize: 20))
+                              style: TextStyle(fontSize: 20, color: Colors.grey[50]))
                         ],
                       ),
                     ),

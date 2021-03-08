@@ -30,7 +30,6 @@ class _IndexPageState extends State<Index> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
       body: Column(children: <Widget>[
         Container(
           color: Colors.teal,
